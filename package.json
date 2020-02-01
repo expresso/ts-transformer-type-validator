@@ -1,6 +1,6 @@
 {
   "name": "@expresso/ts-transformer-type-validator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript transformer to validate expresso requests against a given type",
   "author": "Rogério Munhoz <roz@rjmunhoz.me>",
   "license": "GPL-3.0",
