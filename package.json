@@ -9,7 +9,8 @@
     "clean": "rm -rf dist tsconfig.tsbuildinfo",
     "build:clean": "npm run build && npm run build",
     "lint": "eslint src/**/*.ts",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "npm run build:clean"
   },
   "author": "Rogério Munhoz <roz@rjmunhoz.me>",
   "license": "GPL-3.0",
@@ -44,5 +45,8 @@
     "@types/json5": "0.0.30",
     "json5": "^2.1.1",
     "typescript-json-schema": "^0.42.0"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
