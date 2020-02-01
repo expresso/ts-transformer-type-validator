@@ -2,6 +2,25 @@
   "name": "@expresso/ts-transformer-type-validator",
   "version": "1.0.2",
   "description": "TypeScript transformer to validate expresso requests against a given type",
+  "author": "Rogério Munhoz <roz@rjmunhoz.me>",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/expresso/ts-transformer-type-validator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/expresso/ts-transformer-type-validator/issues"
+  },
+  "homepage": "https://github.com/expresso/ts-transformer-type-validator#readme",
+  "keywords": [
+    "typescript",
+    "ttypescript",
+    "json-schema",
+    "transformer",
+    "transform",
+    "validation",
+    "express"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha -b -r ts-node/register test/**/*.test.ts",
@@ -12,8 +31,6 @@
     "lint:fix": "npm run lint -- --fix",
     "prepare": "npm run build:clean"
   },
-  "author": "Rogério Munhoz <roz@rjmunhoz.me>",
-  "license": "GPL-3.0",
   "devDependencies": {
     "@types/chai": "^4.2.8",
     "@types/mocha": "^5.2.7",
