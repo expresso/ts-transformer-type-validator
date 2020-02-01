@@ -17,7 +17,7 @@ From the terminal, run these commands:
 
 On your tsconfig.json, add a new property and fill it like this:
 
-```json
+```json5
 {
   "compilerOptions": {
     // ...
@@ -52,10 +52,10 @@ type LoginQuery = {
 
 export function factory () {
   return [
-    validateType<LoginBody>({ required: true, ignoreErrors: true }),
-    validateType<LoginParams>({ required: true, ignoreErrors: true }, { property: 'params' }),
-    validateType<LoginQuery>({ required: true, ignoreErrors: true }, { property: 'query' }),
-    validateType<LoginQuery>({ required: true, ignoreErrors: true }, { property: 'user' }),
+    validateType<LoginBody>({ required: true }), // validates the body
+    validateType<LoginParams>({ required: true }, { property: 'params' }),
+    validateType<LoginQuery>({ required: true }, { property: 'query' }),
+    validateType<LoginQuery>({ required: true }, { property: 'user' }),
     async (req: Request, res: Response) => {
         // do something with req
     }
@@ -63,29 +63,67 @@ export function factory () {
 }
 ```
 
-Thi result of the above code should be something like this:
+The result of the above code should be something like this:
 
 ```javascript
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const validator_1 = require("@expresso/validator");
+'use strict'
+Object.defineProperty(exports, '__esModule', { value: true })
+const validator_1 = require('@expresso/validator')
 function factory() {
-    return [
-        validator_1.validateType({ "type": "object", "properties": { "username": { "type": "string" }, "password": { "type": "string" } }, "required": ["password", "username"], "$schema": "http://json-schema.org/draft-07/schema#" }),
-        validator_1.validateType({ "type": "object", "properties": { "app": { "type": "string" } }, "required": ["app"], "$schema": "http://json-schema.org/draft-07/schema#" }, { property: 'params' }),
-        validator_1.validateType({ "type": "object", "properties": { "id": { "type": "boolean" } }, "required": ["id"], "$schema": "http://json-schema.org/draft-07/schema#" }, { property: 'query' }),
-        validator_1.validateType({ "type": "object", "properties": { "id": { "type": "boolean" } }, "required": ["id"], "$schema": "http://json-schema.org/draft-07/schema#" }, { property: 'user' }),
-        async (req, res) => {
-            // do something with req
-        }
-    ];
+  return [
+    validator_1.validateType({
+      type: 'object',
+      properties: {
+        username: { type: 'string' },
+        password: { type: 'string' }
+      },
+      required: ['password', 'username'],
+      $schema: 'http://json-schema.org/draft-07/schema#'
+    }), // validates the body
+    validator_1.validateType(
+      {
+        type: 'object',
+        properties: { app: { type: 'string' } },
+        required: ['app'],
+        $schema: 'http://json-schema.org/draft-07/schema#'
+      },
+      { property: 'params' }
+    ),
+    validator_1.validateType(
+      {
+        type: 'object',
+        properties: { id: { type: 'boolean' } },
+        required: ['id'],
+        $schema: 'http://json-schema.org/draft-07/schema#'
+      },
+      { property: 'query' }
+    ),
+    validator_1.validateType(
+      {
+        type: 'object',
+        properties: { id: { type: 'boolean' } },
+        required: ['id'],
+        $schema: 'http://json-schema.org/draft-07/schema#'
+      },
+      { property: 'user' }
+    ),
+    async (req, res) => {
+      // do something with req
+    }
+  ]
 }
-exports.factory = factory;
+exports.factory = factory
+
 ```
+
+> The block of code above was indented by carbon.now.sh to improve readability.
+> The actual generated code will have schemas as single line object literals.
 
 ## Features
 
-Since this is actuqally a wrapper around [@expresso/validator](https://npmjs.org/package/@expresso/validator) and [typescript-json-schema](https://npmjs.org/package/typescript-json-schema), you should refer to their docs to learn about each feature.
+Since this is actually a wrapper around [@expresso/validator](https://npmjs.org/package/@expresso/validator) and [typescript-json-schema](https://npmjs.org/package/typescript-json-schema), you should refer to their docs to learn about what each one of them can do, and what options you can pass to them.
+
+`typescript-json-schema` is used on compile-time to generate the JSON Schemas for your types, then `@expresso/validator` is used to match your HTTP requests against the generated schemas
 
 Both libraries accept options, which you can pass to the `validateType` function like this:
 
@@ -129,8 +167,21 @@ From the terminal, run the following steps (assuming you've got `node` and `npm`
 
 After that, you're ready to make your changes.
 
-Use `gitmojis` on your commit titles, please :)
+Use [gitmoji](https://github.com/carloscuesta/gitmoji) on your commit titles, please :)
 
 After making your changes, run `npm run:build` to see if everything is OK.
 After that, run `npm test` to run the test files
 Commit, push, and open a Pull Request
+
+## Thanks
+
+This project was only possible because of the effort the community has put on writing awesome
+documentation, tools and examples for the TypeScript Transformer API.
+
+During development, I depended largely on the instructions and documentation
+found on the [Typescript Transformer Handbook](https://github.com/madou/typescript-transformer-handbook) by [madou](https://github.com/madou/).
+
+Also, the inspiration to creating this came from [ts-transform-json-schema](https://github.com/marionebl/ts-transform-json-schema)
+
+Last, but not least, huge thanks to [dsherret](https://github.com/dsherret) for making [ts-ast-viewer](https://github.com/dsherret/ts-ast-viewer). This tool
+**saved my life** during my dives into the TypeScript AST.
