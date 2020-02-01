@@ -1,6 +1,6 @@
 {
   "name": "@expresso/ts-transformer-type-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript transformer to validate expresso requests against a given type",
   "main": "dist/index.js",
   "scripts": {
