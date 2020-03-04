@@ -59,7 +59,7 @@ export const transformerFactory = (program: ts.Program): ts.TransformerFactory<t
   return context => {
     return sourceFile => {
       const visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
-        if (ts.isCallExpression(node) && node.expression.getText().includes('validate')) {
+        if (ts.isCallExpression(node) && node.expression.getText().includes('validateType')) {
           const typeName = getTypeNameFromCall(node, typeChecker)
           return getValidateCall(node, typeName, getValidateCallOptions(node), program)
         }

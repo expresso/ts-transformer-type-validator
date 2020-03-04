@@ -21,7 +21,7 @@ export function getSimpleResult (_transformer?: Transformer) {
   const transformer = _transformer ?? getTransformer()
 
   return transformer.transform(`
-    import { validateType } from '@expresso/validator'
+    import { validateType, validate } from '@expresso/validator'
 
     type LoginParams = {
         app: string
@@ -38,6 +38,7 @@ export function getSimpleResult (_transformer?: Transformer) {
 
     export function factory () {
       return [
+        validate({ type: 'object', properties: { name: { type: 'string' } } }),
         validateType<LoginBody>({ required: true, ignoreErrors: true }),
         validateType<LoginParams>({ required: true, ignoreErrors: true }, { property: 'params' }),
         validateType<LoginQuery>({ required: true, ignoreErrors: true }, { property: 'query' }),

@@ -11,3 +11,7 @@ export type Options = {
 export function validateType <_T> (_schema?: PartialArgs, _validator?: ValidateOptions): RequestHandler {
   throw new Error('this shouldnt be on runtime')
 }
+
+export function validate (params: any) {
+  throw new Error('dummy')
+}
